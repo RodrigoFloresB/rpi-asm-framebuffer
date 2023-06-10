@@ -318,10 +318,37 @@ grietas2 : 	// parametro : x0 = direccion-pixel-comienzo
     add sp, sp, #8 
 
     br lr
-			
-			
 
-dibujarmario :    // x0 = direccion 
+estrella:
+
+	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
+    stur lr, [sp]
+	mov x7,x0   
+
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 5
+	mov x2, 5
+	bl dibujarcuadrado
+
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 10
+	mov x2, 2
+	bl dibujarcuadrado
+
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 2
+	mov x2, 10
+	bl dibujarcuadrado
+		
+    ldur lr, [sp] // Recupero el puntero de retorno del stack
+    add sp, sp, #8 
+
+	br lr		
+
+dibujarmario:    // x0 = direccion 
 
 	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
     stur lr, [sp]

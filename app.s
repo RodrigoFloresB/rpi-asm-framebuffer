@@ -122,6 +122,34 @@ main:
     mov x1, 3
     BL Pintarpixel		
     BL dibujarLuna
+
+    // Estrella
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 6
+	mov x2, 6
+    mov x3, 300
+    mov x4, 50
+    bl Pintarpixel
+	bl dibujarcuadrado
+
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 10
+	mov x2, 2
+    mov x3, 298
+    mov x4, 52
+    bl Pintarpixel
+	bl dibujarcuadrado
+
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 2
+	mov x2, 10
+    mov x3, 302
+    mov x4, 48
+    bl Pintarpixel
+	bl dibujarcuadrado
     
     // EDI 1 
     movz x10, 0xe5, lsl 16 
