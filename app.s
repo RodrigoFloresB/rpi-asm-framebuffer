@@ -17,8 +17,11 @@ main:
 	mov x20, x0 // Guarda la dirección base del framebuffer en x20
 	//---------------- CODE HERE ------------------------------------
            
-        
+    mov x13, 0 // Para gpio  
+
     fondoNoche:
+
+    mov x27, x13
 
     // CIELO
     movz x10, 0x00, lsl 16
@@ -298,6 +301,13 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
+    // MARIO
+    mov x3, 305
+    mov x4, 340
+    BL Pintarpixel
+    BL dibujarmario
+     
+
 	// PORTAL IZQ
 	// CONTORNO PORTAL
 	movz x10, 0x00, lsl 16 
@@ -422,31 +432,36 @@ main:
     BL Pintarpixel
 	BL grietas2 
 	
-	
-	/* dibujomariooo
 
-        mov x3, 400
-        mov x4, 340
-        BL Pintarpixel
-        BL dibujarmario
-     */  
 
-    BL delay
+    // GPIO
+    mov x24,0
       
     loop1:
     //leo_gpio://uso registros 10 y 11
 	
-	mov x9, GPIO_BASE               //direccion del GPIO a x9
+	mov x9, GPIO_BASE                //direccion del GPIO a x9
 	str wzr, [x9, GPIO_GPFSEL0]     //GPIO como solo lectura
 	ldr w10, [x9, GPIO_GPLEV0]
 	and w13, w10, 0b10
+	cmp w27,w13
+	b.eq loop1
+	mov w27, w13
+	cbz w27, loop1
+	cmp w24,0
+	b.eq fondoDia
+	b.ne fondoNoche
 	cbnz w13, fondoDia
+
 	b loop1
+    
 
     //  -------------------------------------
     
 	fondoDia:     
     
+    mov x27, x13 // Para gpio
+
     // CIELO
 
     movz x10, 0x12, lsl 16
@@ -768,18 +783,9 @@ main:
     mov x5, 250
     BL Pintarpixel
 	BL grietas2 
-	
-	BL delay
 
-	loop2:
-    //leo_gpio://uso registros 10 y 11
-	
-	mov x9, GPIO_BASE               //direccion del GPIO a x9
-	str wzr, [x9, GPIO_GPFSEL0]     //GPIO como solo lectura
-	ldr w10, [x9, GPIO_GPLEV0]
-	and w13, w10, 0b10
-	cbnz w13, fondoNoche
-	b loop2
+    mov x24, 1 // PARA GPIO
+    b loop1
 	
 	// Ejemplo de uso de gpios
 	mov x9, GPIO_BASE
