@@ -70,8 +70,6 @@ main:
     BL dibujarLuna
     
     //   crater 3
-	movz x10, 0xa0, lsl 16  
-	movk x10, 0xa0a0, lsl 00
     mov x4, 80
     mov x3, 65	
     mov x1, 3
@@ -79,8 +77,6 @@ main:
     BL dibujarLuna
     
     //   crater 4
-	movz x10, 0xa0, lsl 16  
-	movk x10, 0xa0a0, lsl 00
     mov x4, 60
     mov x3, 83	
     mov x1, 4
@@ -88,8 +84,6 @@ main:
     BL dibujarLuna
     
 	//   crater 5
-	movz x10, 0xa0, lsl 16  
-	movk x10, 0xa0a0, lsl 00
     mov x4, 40
     mov x3, 85
     mov x1, 4
@@ -97,8 +91,6 @@ main:
     BL dibujarLuna
     
 	//   crater 6
-	movz x10, 0xa0, lsl 16  
-	movk x10, 0xa0a0, lsl 00
     mov x4, 30
     mov x3, 50
     mov x1, 3
@@ -106,8 +98,6 @@ main:
     BL dibujarLuna
     
     //   crater 7
-	movz x10, 0xa0, lsl 16  
-	movk x10, 0xa0a0, lsl 00
     mov x4, 70
     mov x3, 50
     mov x1, 3
@@ -115,41 +105,11 @@ main:
     BL dibujarLuna
     
     //   crater 8
-	movz x10, 0xa0, lsl 16  
-	movk x10, 0xa0a0, lsl 00
     mov x4, 55
     mov x3, 55
     mov x1, 3
     BL Pintarpixel		
     BL dibujarLuna
-
-    // Estrella
-	movz x10, 0xfc,lsl 16
-	movk x10, 0xb814, lsl 00	
-	mov x1, 6
-	mov x2, 6
-    mov x3, 300
-    mov x4, 50
-    bl Pintarpixel
-	bl dibujarcuadrado
-
-	movz x10, 0xfc,lsl 16
-	movk x10, 0xb814, lsl 00	
-	mov x1, 10
-	mov x2, 2
-    mov x3, 298
-    mov x4, 52
-    bl Pintarpixel
-	bl dibujarcuadrado
-
-	movz x10, 0xfc,lsl 16
-	movk x10, 0xb814, lsl 00	
-	mov x1, 2
-	mov x2, 10
-    mov x3, 302
-    mov x4, 48
-    bl Pintarpixel
-	bl dibujarcuadrado
     
     // EDI 1 
     movz x10, 0xe5, lsl 16 
@@ -191,8 +151,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 230   //Tamaño X
     mov x2, 5 // Tamaño Y
     mov x3, 205 //Posicion X
@@ -200,8 +158,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 210 //Tamaño X
     mov x2, 5 // Tamaño Y
     mov x3, 430 //Posicion X
@@ -209,17 +165,13 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 5  //Tamaño X
     mov x2, 290 // Tamaño Y
     mov x3, 210 //Posicion X
     mov x4, 90  //Posicion Y
     BL Pintarpixel
     BL dibujarcuadrado
-	
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
+
     mov x1, 5  //Tamaño X
     mov x2, 290 // Tamaño Y
     mov x3, 425 //Posicion X
@@ -228,8 +180,6 @@ main:
     BL dibujarcuadrado
        
     // TECHO EDI 3
-    movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 85  
     mov x2, 85  
     mov x3, 550 
@@ -295,8 +245,6 @@ main:
     BL dibujarcuadrado
 
     // VENTANA EDI 3
-    movz x10, 0x00, lsl 16
-    movk x10, 0x0000, lsl 00
     mov x4, 210 // posicion Y
     mov x1, 50  // radio		
     mov x3, 550	// posicion X
@@ -320,8 +268,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-    movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 99  //Tamaño X
     mov x2, 5 // Tamaño Y
     mov x3, 501 //Posicion X
@@ -347,8 +293,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 	
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 20 //Tamaño X
     mov x2, 80  // Tamaño Y
     mov x3, 50 //Posicion X
@@ -366,8 +310,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0xff00, lsl 00
     mov x1, 10 //Tamaño X
     mov x2, 70  // Tamaño Y
     mov x3, 55 //Posicion X
@@ -386,8 +328,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 	
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 20 //Tamaño X
     mov x2, 80  // Tamaño Y
     mov x3, 570 //Posicion X
@@ -405,8 +345,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0xff00, lsl 00
     mov x1, 10 //Tamaño X
     mov x2, 70  // Tamaño Y
     mov x3, 575 //Posicion X
@@ -550,8 +488,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 230   //Tamaño X
     mov x2, 5 // Tamaño Y
     mov x3, 205 //Posicion X
@@ -559,8 +495,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 210 //Tamaño X
     mov x2, 5 // Tamaño Y
     mov x3, 430 //Posicion X
@@ -568,8 +502,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 5  //Tamaño X
     mov x2, 290 // Tamaño Y
     mov x3, 210 //Posicion X
@@ -577,8 +509,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 	
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 5  //Tamaño X
     mov x2, 290 // Tamaño Y
     mov x3, 425 //Posicion X
@@ -587,8 +517,6 @@ main:
     BL dibujarcuadrado
        
     // TECHO EDI 3
-    movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 85  
     mov x2, 85  
     mov x3, 550 
@@ -654,8 +582,6 @@ main:
     BL dibujarcuadrado
 
     // VENTANA EDI 3
-    movz x10, 0x00, lsl 16
-    movk x10, 0x0000, lsl 00
     mov x4, 210 // posicion Y
     mov x1, 50  // radio		
     mov x3, 550	// posicion X
@@ -679,8 +605,6 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
-    movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 99  //Tamaño X
     mov x2, 5 // Tamaño Y
     mov x3, 501 //Posicion X
@@ -699,8 +623,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 	
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 20 //Tamaño X
     mov x2, 80  // Tamaño Y
     mov x3, 50 //Posicion X
@@ -718,8 +640,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 
-	movz x10, 0x00, lsl 16 
-    movk x10, 0xff00, lsl 00
     mov x1, 10 //Tamaño X
     mov x2, 70  // Tamaño Y
     mov x3, 55 //Posicion X
@@ -738,8 +658,6 @@ main:
     BL Pintarpixel
     BL dibujarcielo
 	
-	movz x10, 0x00, lsl 16 
-    movk x10, 0x0000, lsl 00
     mov x1, 20 //Tamaño X
     mov x2, 80  // Tamaño Y
     mov x3, 570 //Posicion X
@@ -756,9 +674,7 @@ main:
     mov x4, 315 //Posicion Y
     BL Pintarpixel
     BL dibujarcielo
-
-	movz x10, 0x00, lsl 16 
-    movk x10, 0xff00, lsl 00
+    
     mov x1, 10 //Tamaño X
     mov x2, 70  // Tamaño Y
     mov x3, 575 //Posicion X
