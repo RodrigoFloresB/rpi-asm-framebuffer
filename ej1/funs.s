@@ -60,8 +60,44 @@ dibujarcielo:  //x3= x x4 = y x1/x9=Ancho x2/x8=Alto  w10 = color
    //  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
 //  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
- dibujarcuadrado:  //x3= x x4 = y x1/x9=Ancho x2/x8=Alto  w10 = color
+
+estrella:   //x0 = direccion
+
+	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
+    stur lr, [sp]	
+    mov x7,x0      
+	
+	//primera funcion
+	movz x10, 0xfc,lsl 16
+	movk x10, 0xb814, lsl 00	
+	mov x1, 2
+	mov x2, 10
+	bl dibujarcuadrado
+	
+	//segunda funcion
+	mov x1, 6
+	mov x2, 6
+	mov x7,2000
+	lsl x7,x7,1
+	add x7,x7,1112
+	add x0,x0,x7
+		
+	bl dibujarcuadrado
+	
+	// tercera funcion
+	mov x1, 10
+	mov x2, 2
+	mov x7,2000
+	lsl x7,x7,1
+	add x7,x7,1112
+	add x0,x0,x7
+	bl dibujarcuadrado
+	ldur lr, [sp] // Recupero el puntero de retorno del stack
+    add sp, sp, #8 
+
+    br lr
+
+dibujarcuadrado:  //x3= x x4 = y x1/x9=Ancho x2/x8=Alto  w10 = color
  
  	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
     stur lr, [sp]
@@ -317,36 +353,7 @@ grietas2 : 	// parametro : x0 = direccion-pixel-comienzo
 	ldur lr, [sp] // Recupero el puntero de retorno del stack
     add sp, sp, #8 
 
-    br lr
-
-estrella:
-
-	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
-    stur lr, [sp]
-	mov x7,x0   
-
-	movz x10, 0xfc,lsl 16
-	movk x10, 0xb814, lsl 00	
-	mov x1, 5
-	mov x2, 5
-	bl dibujarcuadrado
-
-	movz x10, 0xfc,lsl 16
-	movk x10, 0xb814, lsl 00	
-	mov x1, 10
-	mov x2, 2
-	bl dibujarcuadrado
-
-	movz x10, 0xfc,lsl 16
-	movk x10, 0xb814, lsl 00	
-	mov x1, 2
-	mov x2, 10
-	bl dibujarcuadrado
-		
-    ldur lr, [sp] // Recupero el puntero de retorno del stack
-    add sp, sp, #8 
-
-	br lr		
+    br lr	
 
 dibujarmario:    // x0 = direccion 
 

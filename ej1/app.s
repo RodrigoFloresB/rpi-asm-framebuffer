@@ -110,6 +110,32 @@ main:
     mov x1, 3
     BL Pintarpixel		
     BL dibujarLuna
+
+    // Estrella
+    mov x3 , 130
+    mov x4, 32
+    bl Pintarpixel
+    bl estrella
+
+    mov x3 , 500
+    mov x4, 60
+    bl Pintarpixel
+    bl estrella
+
+    mov x3 , 340
+    mov x4, 70
+    bl Pintarpixel
+    bl estrella
+
+    mov x3 , 250
+    mov x4, 23
+    bl Pintarpixel
+    bl estrella
+		
+    mov x3 , 400
+    mov x4, 35
+    bl Pintarpixel
+    bl estrella
     
     // EDI 1 
     movz x10, 0xe5, lsl 16 
@@ -409,8 +435,8 @@ main:
 	mov x9, GPIO_BASE                //direccion del GPIO a x9
 	str wzr, [x9, GPIO_GPFSEL0]     //GPIO como solo lectura
 	ldr w10, [x9, GPIO_GPLEV0]
-	and w13, w10, 0b10
-	cmp w27,w13
+	and w13, w10, 0b10             // Filtrado
+	cmp w27,w13                   //w13 contiene el valor actual (tiempo real)
 	b.eq loop1
 	mov w27, w13
 	cbz w27, loop1
