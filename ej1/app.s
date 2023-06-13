@@ -437,12 +437,12 @@ main:
 	ldr w10, [x9, GPIO_GPLEV0]
 	and w13, w10, 0b10             // Filtrado
 	cmp w27,w13                   //w13 contiene el valor actual (tiempo real)
-	b.eq loop1
-	mov w27, w13
-	cbz w27, loop1
-	cmp w24,0
-	b.eq fondoDia
-	b.ne fondoNoche
+	b.eq loop1          // &w27 == &w13
+	mov w27, w13        // &w27 := &w13
+	cbz w27, loop1      //&w27 == 0
+	cmp w24,0           // &w24 == 0
+	b.eq fondoDia       // Salta si = 1
+	b.ne fondoNoche     // Salta si = 0
 	cbnz w13, fondoDia
 
 	b loop1

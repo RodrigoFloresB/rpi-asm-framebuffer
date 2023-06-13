@@ -18,21 +18,22 @@ main:
 	//---------------- CODE HERE ------------------------------------
 	
     mov x27,0     
-    //mov x13, 0 // Para gpio  
+    							//mov x13, 0 // Para gpio  
 
     // fondo noche
     mov x3, 0
     mov x4, 0
-    bl Pintarpixel
+    bl Calcularpixel
     bl fondoNoche
 
     // MARIO
     mov x3, 305
     mov x4, 340
-    bl Pintarpixel
+    bl Calcularpixel
     bl dibujarmario
 
-	mov x28, x3
+	// Pos inicial pj
+    mov x28, x3 // x
 
     // GPIO
     //mov x24,0
@@ -43,15 +44,75 @@ main:
 	mov x9, GPIO_BASE                //direccion del GPIO a x9
 	str wzr, [x9, GPIO_GPFSEL0]     //GPIO como solo lectura
 	ldr w10, [x9, GPIO_GPLEV0]
-	and w13, w10, 0b100				
-	cmp w27,w13
-	b.eq loop1	
+	// Filtrado de teclas
+	and w27,w10,0b10		// w27 : w
+	and w13,w10,0b100		// w13 : a 
+	and w25,w10,0b1000		// w25 : s
+	and w14,w10,0b10000		// w14 : d	
+	and w26,w10,0b100000	// w26 : espacio
+	
+	///////////////////////////
+	cmp w13,0				// &w13 = 0 ? Si no lo es, se va a "TeclaA"
+	b.ne teclaA 
+	///////////////////////////
+	cmp w25,0
+	b.ne luigi
+	///////////////////////////
+	cmp w14,0
+	b.ne teclaD
 
+	///////////////////////////
+	cmp w26,0
+	b.ne saltar
+
+	b.eq loop1
+			
+luigi:
+
+	// recuperando la posicion
+	mov x3, x28
+
+    bl Calcularpixel
+    bl dibujarluigi
+
+	mov x28, x3
+
+	b loop1		
+
+teclaA:
 
     // fondo noche
     mov x3, 0
     mov x4, 0
-    bl Pintarpixel
+    bl Calcularpixel
+    bl fondoNoche
+
+	// recuperando la posicion
+
+	mov x3, x28
+
+    // MARIO 
+	sub x3, x3, 0b1
+	mov x4, 340
+    bl Calcularpixel
+    bl dibujarmario
+
+	mov x28, x3
+
+	cbz x3, resetx
+
+	resetx:
+	mov x3, 640
+
+										
+	b loop1									
+	
+	
+teclaD: 
+	    // fondo noche
+    mov x3, 0
+    mov x4, 0
+    bl Calcularpixel
     bl fondoNoche
 
 	// recuperando la posicion
@@ -59,19 +120,54 @@ main:
 	mov x3, x28
 
     // MARIO
-	sub x3, x3, 0b1
+	add x3, x3, 0b1
 	mov x4, 340
-    bl Pintarpixel
+    bl Calcularpixel
     bl dibujarmario
 
 	mov x28, x3
 
+	cbz x3, resetxx
 
-	//mov w27, w13
-	//cbz w27, loop1
-	//cmp w24,0
-	//cb.ne fondoNoche
-	//cbnz w13, fondoDia//
+	resetxx:
+	mov x3, 640
+
+										//mov w27, w13
+	b loop1		
+	
+saltar: 
+
+	
+	// fondo noche
+    mov x3, 0
+    mov x4, 0
+    bl Calcularpixel
+    bl fondoNoche
+
+	// recuperando la posicion
+
+	mov x3, x28
+	mov x4, 300
+    bl Calcularpixel
+    bl dibujarmario
+    
+	bl delay //Espera antes de volver al piso
+     
+	bl Calcularpixel
+    bl fondoNoche
+
+	mov x3, x28
+	mov x4, 340
+	bl Calcularpixel
+	bl dibujarmario
+
+	mov x28, x3
+
+	cbz x3, resetxxxx
+
+	resetxxxx:
+	mov x3, 640
+				
 	b loop1
 	
 	
