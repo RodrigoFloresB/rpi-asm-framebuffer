@@ -424,8 +424,6 @@ main:
     BL Pintarpixel
 	BL grietas2 
 	
-
-
     // GPIO
     mov x24,0
       
@@ -442,7 +440,7 @@ main:
 	cbz w27, loop1      //&w27 == 0
 	cmp w24,0           // &w24 == 0
 	b.eq fondoDia       // Salta si = 1
-	b.ne fondoNoche     // Salta si = 0
+	b.ne fondoNoche     // Salta si =
 	cbnz w13, fondoDia
 
 	b loop1

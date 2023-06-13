@@ -10,6 +10,14 @@ delay:
 	sub x9, x9, 1
 	cbnz x9, loop
 	br lr
+
+delay2:
+	movz x9, 0xff,lsl 16 
+	movk x9, 0xffff, lsl 00
+	loopD2:
+	sub x9, x9, 1
+	cbnz x9, loopD2
+	br lr
 	
 
 Calcularpixel:                          //x3 = x     x4 = y
@@ -338,14 +346,14 @@ pinto:
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
         	
-grietas2 : 	// parametro : x0 = direccion-pixel-comienzo   
+grietas2: 	// parametro : x0 = direccion-pixel-comienzo   
 
 	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
     stur lr, [sp]
 	movz x10, 0x00, lsl 16 
     movk x10, 0x0000, lsl 00
 	mov x12, x0
-pinto2 :
+pinto2:
 	stur w10,[x12]
 	add x12,x12,639
 	sub x5,x5,1
@@ -762,76 +770,6 @@ fondoNoche:
     	bl Calcularpixel
     	bl dibujarcuadrado
 
-	// PORTAL IZQ
-	// CONTORNO PORTAL
-		movz x10, 0x00, lsl 16 
-    	movk x10, 0x0000, lsl 00
-    	mov x1, 50 //Tamaño X
-    	mov x2, 70  // Tamaño Y
-    	mov x3, 0 //Posicion X
-    	mov x4, 310 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-	
-    	mov x1, 20 //Tamaño X
-    	mov x2, 80  // Tamaño Y
-    	mov x3, 50 //Posicion X
-    	mov x4, 300 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-
-	// PORTAL
-		movz x10, 0x00, lsl 16 
-    	movk x10, 0xff00, lsl 00
-    	mov x1, 40 //Tamaño X
-    	mov x2, 60  // Tamaño Y
-    	mov x3, 5 //Posicion X
-    	mov x4, 315 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-
-    	mov x1, 10 //Tamaño X
-    	mov x2, 70  // Tamaño Y
-    	mov x3, 55 //Posicion X
-    	mov x4, 305 //Posicion Y
-    	bl Calcularpixel
-   		bl dibujarcielo
-
-	// PORTAL DER
-	// CONTORNO PORTAL
-		movz x10, 0x00, lsl 16 
-    	movk x10, 0x0000, lsl 00
-    	mov x1, 50 //Tamaño X
-    	mov x2, 70  // Tamaño Y
-    	mov x3, 590 //Posicion X
-    	mov x4, 310 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-	
-    	mov x1, 20 //Tamaño X
-    	mov x2, 80  // Tamaño Y
-    	mov x3, 570 //Posicion X
-    	mov x4, 300 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-
-	// PORTAL
-		movz x10, 0x00, lsl 16 
-    	movk x10, 0xff00, lsl 00
-    	mov x1, 40 //Tamaño X
-    	mov x2, 60  // Tamaño Y
-    	mov x3, 595 //Posicion X
-    	mov x4, 315 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-
-    	mov x1, 10 //Tamaño X
-    	mov x2, 70  // Tamaño Y
-    	mov x3, 575 //Posicion X
-    	mov x4, 305 //Posicion Y
-    	bl Calcularpixel
-    	bl dibujarcielo
-
     	//CALLE
     	movz x10, 0x40, lsl 16 
     	movk x10, 0x4040, lsl 00
@@ -852,160 +790,107 @@ fondoNoche:
     	bl Calcularpixel
     	bl dibujarcuadrado
 
-    	// grietas-derecha
-    	mov x3, 50
-    	mov x4, 400
-    	mov x5, 250
-   	bl Calcularpixel
-	bl grietas    	
-	mov x3, 110
-	mov x4,410
-	mov x5, 200
-	bl Calcularpixel
-	bl grietas    	
-	
-    	// grietas-izquierda
-    	mov x3, 70
-    	mov x4, 400
-    	mov x5, 250
-    	bl Calcularpixel
-	bl grietas2
-	 
-    	mov x3, 150
-    	mov x4, 400
-    	mov x5, 250
-    	bl Calcularpixel
-	bl grietas2 
 
 	ldur lr, [sp] 		// Recupero el puntero de retorno del stack
     add sp, sp, #8 
-	
+
 	br lr
-	
-////////////////////////////////////////////////////////////////////////////////////////	
-	
-	
-dibujarluigi:                   // x0 = direccion 
+
+////////////////////////////////////////////////////////////////////
+
+portalparametrizado:
+
 
 	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
     stur lr, [sp]
-      		
-    mov x7,x0      
-      		
-	//cuerpo luigi
-	movz x10, 0x00,lsl 16
-	movk x10, 0xcc00, lsl 00	
-	mov x1, 30
-	mov x2, 23
-	bl dibujarcuadrado
+
+	// PORTAL IZQ
+	// CONTORNO PORTAL
 	
-	//brazo izquierdo		
-	movz x10, 0x99,lsl 16
-	movk x10, 0x4c00, lsl 00
-	mov x1, 13
-	mov x2, 13
-	sub x0,x0,32
-	bl dibujarcuadrado
-        	
-    //brazo derecho 	
-	add x0,x0,132
-	bl dibujarcuadrado
-        	
-    // muneca derecha  	
-    mov x1, 5
-	mov x2, 13        	
-    mov x7,5
-    mov x6,4000
-    mul x6,x6,x7
-    add x6,x6,528
-	add x0,x0,x6	
-	bl dibujarcuadrado
-      
-	// muneca izquierda  	
-    	sub x0,x0,196	
-	bl dibujarcuadrado
-        	
-    // cara	
-	movz x10, 0xff,lsl 16
-	movk x10, 0xb401, lsl 00
-	mov x1, 20
-	mov x2, 25
-	mov x8,42
-	mov x6,2000
-	mul x6,x6,x8
-	add x6,x6,412	
-	sub x0,x0,x6
-	bl dibujarcuadrado
-		
-	// ojos
-	movz x10, 0xffff,lsl 16
-	movk x10, 0xffff, lsl 00	
-	mov x1, 5
-	mov x2, 5	
-	mov x5,2000
-	mov x6,5
-	mul x5,x5,x6
-	add x5, x5 ,280
-	add x0,x0,x5
-	bl dibujarcuadrado
-		
-	// pelo
-	movz x10, 0x0,lsl 16
-	movk x10, 0x0000, lsl 00
-	mov x1, 15
-	mov x2, 5	
-	sub x0,x0,92
-	bl dibujarcuadrado
-		
-	// orejas,nariz
-	movz x10, 0xff,lsl 16
-	movk x10, 0xb401, lsl 00	
-	mov x1, 32
-	mov x2, 6
-	mov x5,5000
-	lsl x5,x5,1
-	add x5,x5,264
-	add x0,x0,x5
-	bl dibujarcuadrado
-		
-	// gorro
-	movz x10, 0x00,lsl 16
-	movk x10, 0xcc00, lsl 00
-	mov x1, 40
-	mov x2, 6
-	mov x5,4000
-	mov x6,6
-	mul x5,x5,x6
-	add x5,x5,1612
-	sub x0,x0,x5
-	bl dibujarcuadrado
-		
-	// gorro-arriba
-	mov x1, 25
-	mov x2, 6
-	mov x5,4000
-	mov x6,3
-	mul x5,x5,x6
-	add x5,x5,772
-	sub x0,x0,x5
-	bl dibujarcuadrado	
+	movz x10, 0x00, lsl 16 
+    	movk x10, 0x0000, lsl 00
+    	mov x1, 50 
+    	mov x2, 70  
+    	bl dibujarcielo
 	
-	// pierna izquierda
-	mov x1,10
-	mov x2,17
-	mov x5,2000
-	mov x6,70
-	mul x5,x5,x6
-	add x5,x5,832
-	add x0,x0,x5
-	sub x0,x0,40
-	bl dibujarcuadrado
 	
-	// pierna derecha
-	add x0,x0,80
-	bl dibujarcuadrado
+    	mov x1, 20 
+    	mov x2, 80 
+    	
+    	mov x18,4000
+    	mov x19,6
+    	mul x18,x18,x19
+        add x18,x18,1400
+    	sub x0,x0,x18 
+    	
+    	bl dibujarcielo
+    	
+    	
+	movz x10, 0x00, lsl 16 
+    	movk x10, 0xff00, lsl 00
+    	mov x1, 40 
+    	mov x2, 60  	
+    	mov x18,4000
+    	mov x19,9
+    	mul x18,x18,x19
+    	add x18,x18,2220
+    	add x0,x0,x18    	
+    	bl dibujarcielo
+
+	mov x1, 10 
+    	mov x2, 70
+    	mov x18,4000
+    	mov x19,6
+    	mul x18,x18,x19
+        add x18,x18,1400
+    	sub x0,x0,x18 
+   	bl dibujarcielo
+
+	// PORTAL DER
+	// CONTORNO PORTAL
+	movz x10, 0x00, lsl 16 
+    	movk x10, 0x0000, lsl 00
+    	mov x1, 50 
+    	mov x2, 70
+    	mov x19,3000
+    	mov x18,4
+    	mul x18,x18,x19
+    	add x18,x18,2940
+    	add x0,x0,x18  
+    	bl dibujarcielo
+    	
+    	
+    	mov x1, 20 
+    	mov x2, 80
+    	mov x18,4000
+    	mov x19,6
+    	mul x18,x18,x19
+        add x18,x18,1680
+    	sub x0,x0,x18       	
+    	bl dibujarcielo
 	
+	
+	// PORTAL
+	movz x10, 0x00, lsl 16 
+    	movk x10, 0xff00, lsl 00
+    	mov x1, 40 
+    	mov x2, 60      	
+    	mov x18,4000
+    	mov x19,9
+    	mul x18,x18,x19
+        add x18,x18,2500
+    	add x0,x0,x18    	
+    	bl dibujarcielo
+	
+	mov x1, 10 
+    	mov x2, 70    	
+    	mov x18,4000
+    	mov x19,6
+    	mul x18,x18,x19
+        add x18,x18,1680
+    	sub x0,x0,x18     	
+    	bl dibujarcielo
+
 	ldur lr, [sp] 		// Recupero el puntero de retorno del stack
     add sp, sp, #8 
-	
 	br lr

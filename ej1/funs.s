@@ -337,7 +337,7 @@ grietas:  // parametro : x0 = direccion-pixel-comienzo
 
     br lr
         	
-grietas2 : 	// parametro : x0 = direccion-pixel-comienzo   
+grietas2: 	// parametro : x0 = direccion-pixel-comienzo   
 
 	sub sp, sp, #8 // Guardo el puntero de retorno en el stack
     stur lr, [sp]
@@ -363,8 +363,8 @@ dibujarmario:    // x0 = direccion
     mov x7,x0      
       		
     //cuerpo mario
-	movz x10, 0xff,lsl 16
-	movk x10, 0x0000, lsl 00	
+	movz x10, 0x00,lsl 16
+	movk x10, 0xff00, lsl 00	
 	mov x1, 30
 	mov x2, 40
 	bl dibujarcuadrado
@@ -466,8 +466,8 @@ dibujarmario:    // x0 = direccion
 		
 	// gorro
 		
-	movz x10, 0xff,lsl 16
-	movk x10, 0x0000, lsl 00
+	movz x10, 0x00,lsl 16
+	movk x10, 0xff00, lsl 00
 	
 	mov x1, 40
 	mov x2, 6
