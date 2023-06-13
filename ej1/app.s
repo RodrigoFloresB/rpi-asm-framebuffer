@@ -638,6 +638,14 @@ main:
     BL Pintarpixel
     BL dibujarcuadrado
 
+
+    // MARIO
+    mov x3, 305
+    mov x4, 340
+    BL Pintarpixel
+    BL dibujarmario
+     
+
 	// PORTAL IZQ
 	// CONTORNO PORTAL
 	movz x10, 0x00, lsl 16 
