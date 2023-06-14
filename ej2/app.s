@@ -59,7 +59,7 @@ main:
 	cmp w27, 0
 	b.ne teclaW
 	///////////////////////////
-	cmp w13,0				// &w13 = 0 ? Si no lo es, se va a "TeclaA"
+	cmp w13,0
 	b.ne teclaA 
 	///////////////////////////
 	cmp w25,0
@@ -76,20 +76,25 @@ main:
 
 
 teclaW:
+
+        
 	bl delay2
     // fondo noche
     bl Calcularpixel
     bl fondoNoche
+ 
 
 	// recuperando la posicion
 
 	mov x3, x28
-	mov x4, x29
+        mov x4, x29
 
     // MARIO 
 	sub x4, x4, 1
-    bl Calcularpixel
-    bl dibujarmario
+	cmp x4, 350
+	b.le funcionW
+        bl Calcularpixel
+        bl dibujarmario
 
 	mov x28, x3
 	mov x29, x4
@@ -103,9 +108,11 @@ teclaW:
 	cbz x3, resetW
 	resetW:
 	mov x3, 640
+	
 
 										
 	b loop1
+	
 
 teclaS:
 	bl delay2
@@ -120,6 +127,8 @@ teclaS:
 
     // MARIO 
 	add x4, x4, 1
+	cmp x4, 440
+	b.ge funcionS
     bl Calcularpixel
     bl dibujarmario
 
@@ -136,9 +145,11 @@ teclaS:
 	resetS:
 	mov x3, 640
 
-										
-	b loop1								
+ 
 
+								
+	b loop1	
+	
 teclaA:
 	bl delay2
 
@@ -253,6 +264,80 @@ saltar:
 	mov x3, 640
 				
 	b loop1
+	
+	
+	
+funcionW:
+
+	bl delay2
+       // fondo noche
+       bl Calcularpixel
+       bl fondoNoche
+        
+
+	// recuperando la posicion
+
+	mov x3, x28
+        mov x4, x29
+
+    // MARIO 
+
+	
+	
+    bl Calcularpixel
+    bl dibujarmario
+
+	mov x28, x3
+	mov x29, x4
+		
+	mov x3, 0
+	mov x4, 410
+	bl Calcularpixel
+	bl portalparametrizado
+
+
+	cbz x3, resetWW
+	resetWW:
+	mov x3, 640
+	
+
+										
+	b loop1
+	
+	//--------------------------------------------------------------------------------------------------------------------------------------------------------
+	funcionS:
+	bl delay2
+    // fondo noche
+    bl Calcularpixel
+    bl fondoNoche
+
+	// recuperando la posicion
+
+	mov x3, x28
+	mov x4, x29
+
+    // MARIO 
+	
+    bl Calcularpixel
+    bl dibujarmario
+
+	mov x28, x3
+	mov x29, x4
+		
+	mov x3, 0
+	mov x4, 410
+	bl Calcularpixel
+	bl portalparametrizado
+
+
+	cbz x3, resetSS
+	resetSS:
+	mov x3, 640
+
+ 
+
+								
+	b loop1	
 	
 	
 	// Ejemplo de uso de gpios

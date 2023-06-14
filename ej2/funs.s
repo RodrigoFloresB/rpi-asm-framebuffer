@@ -790,6 +790,36 @@ fondoNoche:
     	bl Calcularpixel
     	bl dibujarcuadrado
 
+	// Linea calle 
+    	movz x10, 0xff, lsl 16 
+    	movk x10, 0xe02e, lsl 00
+    	mov x1, 113   //Tamaño X
+    	mov x2, 5  // Tamaño Y
+    	mov x3, 140   //Posicion X
+    	mov x4, 420   //Posicion Y
+    	bl Calcularpixel
+    	bl dibujarcuadrado
+
+		movz x10, 0xff, lsl 16 
+    	movk x10, 0xe02e, lsl 00
+    	mov x1, 113  //Tamaño X
+    	mov x2, 5  // Tamaño Y
+    	mov x3, 273    //Posicion X
+    	mov x4, 420   //Posicion Y
+    	bl Calcularpixel
+    	bl dibujarcuadrado
+
+		movz x10, 0xff, lsl 16 
+    	movk x10, 0xe02e, lsl 00
+    	mov x1, 113   //Tamaño X
+    	mov x2, 5  // Tamaño Y
+    	mov x3, 406   //Posicion X
+    	mov x4, 420   //Posicion Y
+    	bl Calcularpixel
+    	bl dibujarcuadrado
+
+
+
 
 	ldur lr, [sp] 		// Recupero el puntero de retorno del stack
     add sp, sp, #8 
