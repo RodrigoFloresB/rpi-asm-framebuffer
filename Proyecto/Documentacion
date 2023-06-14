@@ -1,0 +1,11 @@
+Rodrigo Nestor Flores Bazan | DNI : 43560967
+Lucas Oscar Gallegos | DNI : 44076253
+Facundo Luis Rodriguez | DNI : 42383090
+
+Ejercicio 1 : La idea principal es simular el juego "Mario Bros", con el fondo
+de una ciudad que mediante la tecla 'w' podemos elegir entre el dia o la noche.
+
+Ejercicio 2 : Nos basamos en el 'ejercicio 1' pero esta vez enfocados en los
+movimiento (limitados) del personaje, con las asignaciones tipicas de un videojuego. 
+
+'w' = ↑ , 'a' = ← , 's' = ↓ , 'd' = → , barra espaciadora = saltar.
